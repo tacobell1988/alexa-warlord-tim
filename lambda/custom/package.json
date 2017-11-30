@@ -1,7 +1,7 @@
 {
-  "name": "skill-sample-nodejs-hello-world",
+  "name": "alexa-warlord-tim",
   "version": "1.0.0",
-  "description": "Hello world sample skill",
+  "description": "Warlord Tim Office Companion",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

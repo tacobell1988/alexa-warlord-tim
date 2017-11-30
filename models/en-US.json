@@ -1,47 +1,54 @@
 {
-    "interactionModel":{
-        "languageModel":{
-            "invocationName":"hello world",
-            "types":[],
-            "intents":[
-                {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
-                },
-                {
-                    "name":"HelloWorldIntent",
-                    "slots":[
-
-                    ],
-                    "samples":[
-                        "hello",
-                        "say hello",
-                        "say hello world"
-                    ]
-                },
-                {
-                    "name":"MyNameIsIntent",
-                    "slots":[
-                        {
-                            "name":"name",
-                            "type":"AMAZON.US_FIRST_NAME"
-                        }
-                    ],
-                    "samples":[
-                        "my name is {name}",
-                        "i am {name}",
-                        "you can call me {name}"
-                    ]
-                }
-            ]
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "warlord tim",
+      "types": [],
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "GoofingOff",
+          "slots": [],
+          "samples": [
+            "who is goofing off",
+            "who is goofing around",
+            "who is wasting company resources",
+            "who is wasting time",
+            "is anyone wasting time",
+            "is anyone being unproductive",
+            "why is my internet slow",
+            "why can't I connect",
+            "who is streaming",
+            "is anyone streaming",
+            "is anyone watching a movie"
+          ]
+        },
+        {
+          "name": "TerminateEmployee",
+          "slots": [
+            {
+              "name": "name",
+              "type": "AMAZON.US_FIRST_NAME"
+            }
+          ],
+          "samples": [
+            "i need you to fire {name}",
+            "can you fire {name}",
+            "{name} needs to be let go",
+            "get rid of {name}"
+          ]
         }
+      ]
     }
+  }
 }
