@@ -29,6 +29,20 @@ var getRandomValue = function(arr) {
   return valArr[valIdx];
 };
 
+const alexaResponse = function(context, text) {
+  textToPolly(text, function(err, data) {
+    if (err) {
+      context.response
+        .speak("Crap - Warlord Tim is taking a really long dump. Try again later.")
+        .cardRenderer(skillName, "Warlord Tim is taking a dump");
+    } else {
+      const url = data;
+      context.response.speak(`<audio src="${url}" />`).cardRenderer(skillName, text);
+    }
+    context.emit(":responseReady");
+  });
+};
+
 var handlers = {
   LaunchRequest: function() {
     this.emit("SayHello");
@@ -44,34 +58,20 @@ var handlers = {
     const randSvc = getRandomValue(goofServices);
     const randTermination = getRandomValue(painfulTerminations);
     const response = `Ugh, it appears that ${randName} is watching ${randSvc}. ${randTermination}`;
-    var that = this;
-    textToPolly(response, function(err, data) {
-      if (err) {
-        that.response
-          .speak("Crap - Warlord Tim is taking a really long dump. Try again later.")
-          .cardRenderer(skillName, "Warlord Tim is taking a dump");
-      } else {
-        const url = data;
-        that.response.speak(`<audio src="${url}" />`);
-        //.cardRenderer(skillName, response);
-      }
-      that.emit(":responseReady");
-    });
+    alexaResponse(this, response);
   },
   SayTerminateEmployee: function() {
     var name = this.event.request.intent.slots.name.value;
     const response = `Ah, yes, ${
       name
     } had it coming. I have dispatched a small army of 1000 warriors, you will not be disappointed.`;
-    this.response.speak(response).cardRenderer(skillName, response);
-    this.emit(":responseReady");
+    alexaResponse(this, response);
   },
   SessionEndedRequest: function() {
     console.log("Session ended with reason: " + this.event.request.reason);
   },
   "AMAZON.StopIntent": function() {
-    this.response.speak("It was my pleasure to serve you my emperor");
-    this.emit(":responseReady");
+    alexaResponse(this, "It was my pleasure to serve you my emperor");
   },
   "AMAZON.HelpIntent": function() {
     this.response.speak(
@@ -80,11 +80,11 @@ var handlers = {
     this.emit(":responseReady");
   },
   "AMAZON.CancelIntent": function() {
-    this.response.speak("Indecisiveness is not a good quality for a leader");
-    this.emit(":responseReady");
+    alexaResponse(this, "Indecisiveness is not a good quality for a leader");
   },
   Unhandled: function() {
-    this.response.speak(
+    alexaResponse(
+      this,
       "I don't like what you said, be careful how you proceed. You can try: 'alexa, ask warlord tim who is wasting time'"
     );
   }

@@ -31,7 +31,7 @@ const getUrl = function(filename) {
 
 const invokePolly = function(text, cb) {
   const params = {
-    Text: '<speak><prosody pitch="x-low">' + text + "</prosody></speak>",
+    Text: "<speak>" + text + "</speak>",
     TextType: "ssml",
     OutputFormat: "mp3",
     VoiceId: "Hans"
