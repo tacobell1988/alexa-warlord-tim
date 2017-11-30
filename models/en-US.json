@@ -34,6 +34,30 @@
           ]
         },
         {
+          "name": "BonusCheck",
+          "samples": [
+            "should I expect a bonus this year",
+            "am I getting a bonus",
+            "what kind of bonus am I getting",
+            "to tell me about a bonus"
+          ]
+        },
+        {
+          "name": "KeyResults",
+          "samples": [
+            "Give me Key Results",
+            "How are we doing as a company",
+            "How does our pipeline looking for rest of the year",
+            "Are we in a position to meet our goals",
+            "Compare revenue to last year same period",
+            "How does my scorecard look",
+            "How is my spend level",
+            "Who are our top customers",
+            "List top 3 marketing campaigns",
+            "Company flash briefing"
+          ]
+        },
+        {
           "name": "TerminateEmployee",
           "slots": [
             {

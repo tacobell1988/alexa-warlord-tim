@@ -23,6 +23,12 @@ var painfulTerminations = [
   "The hounds are already en route"
 ];
 
+var horribleBonuses = [
+  "You want a bonus? Ha - only after the rivers flow with the blood of our competitors. Get back to work, now.",
+  "Here is your bonus - I let you live",
+  "You had a bonus until we found you streaming Netflix"
+];
+
 var getRandomValue = function(arr) {
   const valArr = arr;
   const valIdx = Math.floor(Math.random() * valArr.length);
@@ -45,7 +51,7 @@ const alexaResponse = function(context, text) {
 
 var handlers = {
   LaunchRequest: function() {
-    this.emit("SayHello");
+    this.emit("SayGoofingOff");
   },
   GoofingOff: function() {
     this.emit("SayGoofingOff");
@@ -53,11 +59,26 @@ var handlers = {
   TerminateEmployee: function() {
     this.emit("SayTerminateEmployee");
   },
+  BonusCheck: function() {
+    this.emit("SayBonusCheck");
+  },
+  KeyResults: function() {
+    this.emit("SayKeyResults");
+  },
+  SayKeyResults: function() {
+    alexaResponse(this, "Check back later...");
+  },
+  SayBonusCheck: function() {
+    const randResponse = getRandomValue(horribleBonuses);
+    alexaResponse(this, randResponse);
+  },
   SayGoofingOff: function() {
     const randName = getRandomValue(employees);
     const randSvc = getRandomValue(goofServices);
     const randTermination = getRandomValue(painfulTerminations);
-    const response = `Ugh, it appears that ${randName} is watching ${randSvc}. ${randTermination}`;
+    const response = `From the darkest pits of despair, it appears that ${randName} is watching ${randSvc}. ${
+      randTermination
+    }`;
     alexaResponse(this, response);
   },
   SayTerminateEmployee: function() {
