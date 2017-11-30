@@ -1,6 +1,7 @@
 "use strict";
 var Alexa = require("alexa-sdk");
 var textToPolly = require("./polly");
+const buildGoofingOff = require("./goofingoff");
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
@@ -12,28 +13,11 @@ exports.handler = function(event, context) {
 
 const skillName = "warlord tim";
 
-var employees = ["Mike", "Srinivas", "Josh", "Greg", "Brian", "Ryan", "Bob", "Rodney"];
-
-var goofServices = ["Netflix", "Hulu", "Amazon Video", "HBO Now"];
-
-var painfulTerminations = [
-  "Shall I terminate them?",
-  "Shall I dispatch my army of rabid dogs?",
-  "Do you want me to bring you their head?",
-  "The hounds are already en route"
-];
-
 var horribleBonuses = [
   "You want a bonus? Ha - only after the rivers flow with the blood of our competitors. Get back to work, now.",
   "Here is your bonus - I let you live",
   "You had a bonus until we found you streaming Netflix"
 ];
-
-var getRandomValue = function(arr) {
-  const valArr = arr;
-  const valIdx = Math.floor(Math.random() * valArr.length);
-  return valArr[valIdx];
-};
 
 const alexaResponse = function(context, text) {
   textToPolly(text, function(err, data) {
@@ -73,19 +57,14 @@ var handlers = {
     alexaResponse(this, randResponse);
   },
   SayGoofingOff: function() {
-    const randName = getRandomValue(employees);
-    const randSvc = getRandomValue(goofServices);
-    const randTermination = getRandomValue(painfulTerminations);
-    const response = `From the darkest pits of despair, it appears that ${randName} is watching ${randSvc}. ${
-      randTermination
-    }`;
+    const response = buildGoofingOff();
     alexaResponse(this, response);
   },
   SayTerminateEmployee: function() {
     var name = this.event.request.intent.slots.name.value;
     const response = `Ah, yes, ${
       name
-    } had it coming. I have dispatched a small army of 1000 warriors, you will not be disappointed.`;
+    } is a horrible employee. I have dispatched a small army of 1000 warriors, you will not be disappointed.`;
     alexaResponse(this, response);
   },
   SessionEndedRequest: function() {
