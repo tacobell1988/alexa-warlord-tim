@@ -10,7 +10,7 @@ alexa-sdk@^1.0.0:
     i18next "^3.4.1"
     i18next-sprintf-postprocessor "^0.2.2"
 
-aws-sdk@^2.4.7:
+aws-sdk@2.160.0, aws-sdk@^2.4.7:
   version "2.160.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.160.0.tgz#87863761503fc42910059149ce5a6e42e1b94d16"
   dependencies:
@@ -84,6 +84,10 @@ sax@1.2.1:
 sax@>=0.6.0:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+
+shortid@2.2.8:
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.8.tgz#033b117d6a2e975804f6f0969dbe7d3d0b355131"
 
 url@0.10.3:
   version "0.10.3"
