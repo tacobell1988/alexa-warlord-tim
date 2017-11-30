@@ -44,16 +44,18 @@ var handlers = {
     const randSvc = getRandomValue(goofServices);
     const randTermination = getRandomValue(painfulTerminations);
     const response = `Ugh, it appears that ${randName} is watching ${randSvc}. ${randTermination}`;
+    var that = this;
     textToPolly(response, function(err, data) {
       if (err) {
-        this.response
+        that.response
           .speak("Crap - Warlord Tim is taking a really long dump. Try again later.")
           .cardRenderer(skillName, "Warlord Tim is taking a dump");
       } else {
         const url = data;
-        this.response.speak(`<speak><audio src="${url}" /></speak>`).cardRenderer(skillName, response);
+        that.response.speak(`<audio src="${url}" />`);
+        //.cardRenderer(skillName, response);
       }
-      this.emit(":responseReady");
+      that.emit(":responseReady");
     });
   },
   SayTerminateEmployee: function() {
