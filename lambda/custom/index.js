@@ -1,6 +1,6 @@
 "use strict";
 var Alexa = require("alexa-sdk");
-
+var textToPolly = require("./polly");
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
@@ -44,8 +44,17 @@ var handlers = {
     const randSvc = getRandomValue(goofServices);
     const randTermination = getRandomValue(painfulTerminations);
     const response = `Ugh, it appears that ${randName} is watching ${randSvc}. ${randTermination}`;
-    this.response.speak(response).cardRenderer(skillName, response);
-    this.emit(":responseReady");
+    textToPolly(response, function(err, data) {
+      if (err) {
+        this.response
+          .speak("Crap - Warlord Tim is taking a really long dump. Try again later.")
+          .cardRenderer(skillName, "Warlord Tim is taking a dump");
+      } else {
+        const url = data;
+        this.response.speak(`<speak><audio src="${url}" /></speak>`).cardRenderer(skillName, response);
+      }
+      this.emit(":responseReady");
+    });
   },
   SayTerminateEmployee: function() {
     var name = this.event.request.intent.slots.name.value;
